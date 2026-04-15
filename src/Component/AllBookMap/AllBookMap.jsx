@@ -1,13 +1,14 @@
 import React from 'react';
 import { FaRegStar } from 'react-icons/fa';
+import { Link } from 'react-router';
 
 const AllBookMap = ({ book }) => {
-    console.log(book)
+    
     return (
         <div>
             <div className="card bg-base-100 shadow-sm p-6 w-full border border-neutral/10">
                 <figure className='bg-base-300'>
-                    <img className='rounded-xl my-6 h-65 bg-base-300' 
+                    <img className='rounded-xl my-6 h-65 bg-base-300'
                         src={book.image}
                         alt={book.bookName} />
                 </figure>
@@ -26,6 +27,7 @@ const AllBookMap = ({ book }) => {
                             <FaRegStar />
                         </div>
                     </div>
+                    <Link className='btn btn-accent text-white' to={`/bookDetails/${book.bookId}`}>Show Details</Link>
                 </div>
             </div>
         </div>
