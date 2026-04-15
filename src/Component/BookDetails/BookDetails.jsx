@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useContext, } from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { bookContextApi } from '../context/BookContext';
+
 
 const BookDetails = () => {
     const {bookId} = useParams();
     const books = useLoaderData();
     
     const expectedBook = books.find(book=> book.bookId == bookId);
-    console.log(expectedBook)
+    
+
+    const {handleAddToRead} = useContext(bookContextApi)
+    const {handleAddToWishList} = useContext(bookContextApi)
+
     return (
         <div className='container mx-auto mt-20'>
             <div className="card lg:card-side bg-base-100 grid grid-cols-2 gap-3">
@@ -42,11 +48,12 @@ const BookDetails = () => {
                         <p className='font-bold'>{expectedBook.rating}</p>
                     </div>
                     <div className="card-actions gap-4">
-                        <button className="btn ">Read</button>
-                        <button className="btn btn-info text-white">Wishlist</button>
+                        <button className="btn" onClick={()=> handleAddToRead(expectedBook)}>Read</button>
+                        <button className="btn btn-info text-white" onClick={()=> handleAddToWishList(expectedBook)}>Wishlist</button>
                     </div>
                 </div>
             </div>
+           
         </div>
     );
 };
